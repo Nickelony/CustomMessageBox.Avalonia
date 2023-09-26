@@ -1,0 +1,50 @@
+<Window
+	x:Class="CustomMessageBox.Avalonia.MessageBox"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="using:CustomMessageBox.Avalonia"
+	CanResize="False"
+	DataContext="{Binding $self}"
+	RenderOptions.BitmapInterpolationMode="HighQuality"
+	SizeToContent="WidthAndHeight"
+	WindowStartupLocation="CenterOwner">
+
+	<StackPanel Orientation="{Binding DialogContentOrientation}" Spacing="{Binding MessagePanelToButtonsPanelSpacing}">
+		<StackPanel
+			HorizontalAlignment="{Binding HorizontalMessagePanelAlignment}"
+			VerticalAlignment="{Binding VerticalMessagePanelAlignment}"
+			Orientation="{Binding MessagePanelOrientation}"
+			Spacing="{Binding IconToMessageSpacing}">
+			<Grid
+				x:Name="PART_IconGrid"
+				HorizontalAlignment="{Binding HorizontalIconAlignment}"
+				VerticalAlignment="{Binding VerticalIconAlignment}">
+				<PathIcon
+					x:Name="PART_PathIcon"
+					Width="{Binding IconWidth}"
+					Height="{Binding IconHeight}" />
+				<Image
+					x:Name="PART_ImageIcon"
+					Width="{Binding IconWidth}"
+					Height="{Binding IconHeight}"
+					IsVisible="False" />
+			</Grid>
+			<Panel HorizontalAlignment="{Binding HorizontalMessageAlignment}" VerticalAlignment="{Binding VerticalMessageAlignment}">
+				<ContentPresenter x:Name="PART_ContentPresenter" />
+			</Panel>
+		</StackPanel>
+		<StackPanel
+			x:Name="PART_ButtonsPanel"
+			HorizontalAlignment="{Binding HorizontalButtonsPanelAlignment}"
+			VerticalAlignment="{Binding VerticalButtonsPanelAlignment}"
+			Orientation="{Binding ButtonsPanelOrientation}"
+			Spacing="{Binding ButtonSpacing}">
+			<StackPanel.Styles>
+				<Style Selector="Button">
+					<Setter Property="MinWidth" Value="{Binding MinButtonWidth}" />
+					<Setter Property="HorizontalContentAlignment" Value="Center" />
+				</Style>
+			</StackPanel.Styles>
+		</StackPanel>
+	</StackPanel>
+</Window>
