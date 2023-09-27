@@ -1,4 +1,4 @@
-# CustomMessageBox for Avalonia
+# Custom MessageBox for Avalonia
 A highly customizable MessageBox pop-up for Avalonia with pre-set and custom buttons and plenty of layout options.
 
 # Examples
