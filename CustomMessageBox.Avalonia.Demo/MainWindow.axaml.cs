@@ -103,7 +103,7 @@ public partial class MainWindow : Window
 			TextAlignment = TextAlignment.Center
 		};
 
-		var messageBox = new MessageBox(textBlock, "Custom 1", MessageBoxIcon.Question)
+		var messageBox = new MessageBox(textBlock, "Custom 1", MessageBoxIcon.Error)
 		{
 			DialogContentOrientation = Orientation.Horizontal,
 			MessagePanelOrientation = Orientation.Vertical,
