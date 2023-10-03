@@ -13,8 +13,9 @@
 	  <PackageProjectUrl>https://github.com/Nickelony/CustomMessageBox.Avalonia</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/Nickelony/CustomMessageBox.Avalonia</RepositoryUrl>
 	  <PackageTags>avalonia avaloniaui custom messagebox message box popup</PackageTags>
-	  <Version>11.0.0</Version>
+	  <Version>11.0.0.1</Version>
 	  <PackageIcon>Icon.png</PackageIcon>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
