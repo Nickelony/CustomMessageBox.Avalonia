@@ -43,10 +43,7 @@ var messageBox = new MessageBox(
   HorizontalButtonsPanelAlignment = HorizontalAlignment.Center
 };
 
-var result = messageBox.Show(
-  new MessageBoxButton<MessageBoxResult>(MessageBox.YesText, MessageBoxResult.Yes, SpecialButtonRole.IsDefault, "accent"),
-  new MessageBoxButton<MessageBoxResult>(MessageBox.NoText, MessageBoxResult.No)
-);
+var result = messageBox.Show(MessageBoxButtons.YesNo, MessageBoxDefaultButton.Button1, "accent");
 ```
 ---
 ![image](https://github.com/Nickelony/CustomMessageBox.Avalonia/assets/20436882/50416bdf-a7d9-4e10-9c4a-7f7b060c9756)
@@ -63,10 +60,7 @@ var messageBox = new MessageBox(
   IconHeight = 64
 };
 
-var result = messageBox.Show(
-  new MessageBoxButton<MessageBoxResult>(MessageBox.YesText, MessageBoxResult.Yes, SpecialButtonRole.IsDefault, "accent"),
-  new MessageBoxButton<MessageBoxResult>(MessageBox.NoText, MessageBoxResult.No)
-);
+var result = messageBox.Show(MessageBoxButtons.YesNo, MessageBoxDefaultButton.Button1, "accent");
 ```
 ---
 ![image](https://github.com/Nickelony/CustomMessageBox.Avalonia/assets/20436882/966d04d7-e219-471f-8585-e7730066f551)
