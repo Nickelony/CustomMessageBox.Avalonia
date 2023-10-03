@@ -303,6 +303,18 @@ namespace CustomMessageBox.Avalonia
 			return completionSource.Task;
 		}
 
+		/// <inheritdoc cref="Show{TResult}(MessageBoxButton{TResult}[])"/>
+		public Task<MessageBoxResult> Show(MessageBoxButtons buttons,
+			MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.None,
+			params string[] defaultButtonClassNames)
+			=> Show(WindowHelper.FindViableOwner(), buttons, defaultButton, defaultButtonClassNames);
+
+		/// <inheritdoc cref="Show{TResult}(Window?, MessageBoxButton{TResult}[])"/>
+		public Task<MessageBoxResult> Show(Window? owner, MessageBoxButtons buttons,
+			MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.None,
+			params string[] defaultButtonClassNames)
+			=> Show(owner, CreatePresetButtons(buttons, defaultButton, defaultButtonClassNames));
+
 		#endregion Show()
 
 		#region Static Show()
@@ -359,52 +371,7 @@ namespace CustomMessageBox.Avalonia
 		public static Task<MessageBoxResult> Show(Window? owner, object message, string caption,
 			MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None,
 			MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.None, params string[] defaultButtonClassNames)
-		{
-			var buttonList = new List<MessageBoxButton<MessageBoxResult>>();
-
-			void AddButtonToList(MessageBoxButton<MessageBoxResult> messageBoxButton)
-			{
-				if (buttonList.Count == (int)defaultButton)
-					messageBoxButton.SpecialRole = SpecialButtonRole.IsDefault;
-
-				if (messageBoxButton.SpecialRole == SpecialButtonRole.IsDefault && defaultButtonClassNames != null)
-					messageBoxButton.ClassNames = defaultButtonClassNames;
-
-				buttonList.Add(messageBoxButton);
-			}
-
-			if (buttons == MessageBoxButtons.OK || buttons == MessageBoxButtons.OKCancel)
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(OKText, MessageBoxResult.OK));
-
-			if (buttons == MessageBoxButtons.YesNo || buttons == MessageBoxButtons.YesNoCancel)
-			{
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(YesText, MessageBoxResult.Yes));
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(NoText, MessageBoxResult.No));
-			}
-
-			if (buttons == MessageBoxButtons.AbortRetryIgnore)
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(AbortText, MessageBoxResult.Abort));
-
-			if (buttons == MessageBoxButtons.AbortRetryIgnore || buttons == MessageBoxButtons.RetryCancel)
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(RetryText, MessageBoxResult.Retry));
-
-			if (buttons == MessageBoxButtons.AbortRetryIgnore)
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(IgnoreText, MessageBoxResult.Ignore));
-
-			if (buttons == MessageBoxButtons.OKCancel ||
-				buttons == MessageBoxButtons.YesNoCancel ||
-				buttons == MessageBoxButtons.RetryCancel ||
-				buttons == MessageBoxButtons.CancelTryContinue)
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(CancelText, MessageBoxResult.Cancel, SpecialButtonRole.IsCancel));
-
-			if (buttons == MessageBoxButtons.CancelTryContinue)
-			{
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(TryAgainText, MessageBoxResult.TryAgain));
-				AddButtonToList(new MessageBoxButton<MessageBoxResult>(ContinueText, MessageBoxResult.Continue));
-			}
-
-			return Show(owner, message, caption, icon, buttonList.ToArray());
-		}
+			=> Show(owner, message, caption, icon, CreatePresetButtons(buttons, defaultButton, defaultButtonClassNames));
 
 		/// <summary>
 		/// Opens a message box with the specified content.
@@ -501,6 +468,54 @@ namespace CustomMessageBox.Avalonia
 		{
 			if (this.FindControl<ContentPresenter>("PART_ContentPresenter") is ContentPresenter contentPresenter)
 				contentPresenter.Content = content;
+		}
+
+		private static MessageBoxButton<MessageBoxResult>[] CreatePresetButtons(MessageBoxButtons buttons, MessageBoxDefaultButton defaultButton = MessageBoxDefaultButton.None, params string[] defaultButtonClassNames)
+		{
+			var buttonList = new List<MessageBoxButton<MessageBoxResult>>();
+
+			void AddButtonToList(MessageBoxButton<MessageBoxResult> messageBoxButton)
+			{
+				if (buttonList.Count == (int)defaultButton)
+					messageBoxButton.SpecialRole = SpecialButtonRole.IsDefault;
+
+				if (messageBoxButton.SpecialRole == SpecialButtonRole.IsDefault && defaultButtonClassNames != null)
+					messageBoxButton.ClassNames = defaultButtonClassNames;
+
+				buttonList.Add(messageBoxButton);
+			}
+
+			if (buttons == MessageBoxButtons.OK || buttons == MessageBoxButtons.OKCancel)
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(OKText, MessageBoxResult.OK));
+
+			if (buttons == MessageBoxButtons.YesNo || buttons == MessageBoxButtons.YesNoCancel)
+			{
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(YesText, MessageBoxResult.Yes));
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(NoText, MessageBoxResult.No));
+			}
+
+			if (buttons == MessageBoxButtons.AbortRetryIgnore)
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(AbortText, MessageBoxResult.Abort));
+
+			if (buttons == MessageBoxButtons.AbortRetryIgnore || buttons == MessageBoxButtons.RetryCancel)
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(RetryText, MessageBoxResult.Retry));
+
+			if (buttons == MessageBoxButtons.AbortRetryIgnore)
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(IgnoreText, MessageBoxResult.Ignore));
+
+			if (buttons == MessageBoxButtons.OKCancel ||
+				buttons == MessageBoxButtons.YesNoCancel ||
+				buttons == MessageBoxButtons.RetryCancel ||
+				buttons == MessageBoxButtons.CancelTryContinue)
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(CancelText, MessageBoxResult.Cancel, SpecialButtonRole.IsCancel));
+
+			if (buttons == MessageBoxButtons.CancelTryContinue)
+			{
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(TryAgainText, MessageBoxResult.TryAgain));
+				AddButtonToList(new MessageBoxButton<MessageBoxResult>(ContinueText, MessageBoxResult.Continue));
+			}
+
+			return buttonList.ToArray();
 		}
 
 		#endregion Other methods

@@ -41,10 +41,7 @@ public partial class MainWindow : Window
 			HorizontalButtonsPanelAlignment = HorizontalAlignment.Center
 		};
 
-		messageBox.Show(
-			new MessageBoxButton<MessageBoxResult>(MessageBox.YesText, MessageBoxResult.Yes, SpecialButtonRole.IsDefault, "accent"),
-			new MessageBoxButton<MessageBoxResult>(MessageBox.NoText, MessageBoxResult.No)
-		);
+		messageBox.Show(MessageBoxButtons.YesNo, MessageBoxDefaultButton.Button1, "accent");
 	}
 
 	private void Button_Traditional_BottomRight(object? sender, RoutedEventArgs e)
@@ -69,10 +66,7 @@ public partial class MainWindow : Window
 			HorizontalButtonsPanelAlignment = HorizontalAlignment.Left
 		};
 
-		messageBox.Show(
-			new MessageBoxButton<MessageBoxResult>(MessageBox.YesText, MessageBoxResult.Yes, SpecialButtonRole.IsDefault, "accent"),
-			new MessageBoxButton<MessageBoxResult>(MessageBox.NoText, MessageBoxResult.No)
-		);
+		messageBox.Show(MessageBoxButtons.YesNo, MessageBoxDefaultButton.Button1, "accent");
 	}
 
 	private void Button_Traditional_CustomImage(object? sender, RoutedEventArgs e)
@@ -88,10 +82,7 @@ public partial class MainWindow : Window
 			IconHeight = 64
 		};
 
-		messageBox.Show(
-			new MessageBoxButton<MessageBoxResult>(MessageBox.YesText, MessageBoxResult.Yes, SpecialButtonRole.IsDefault, "accent"),
-			new MessageBoxButton<MessageBoxResult>(MessageBox.NoText, MessageBoxResult.No)
-		);
+		messageBox.Show(MessageBoxButtons.YesNo, MessageBoxDefaultButton.Button1, "accent");
 	}
 
 	private void Button_Custom1(object? sender, RoutedEventArgs e)
