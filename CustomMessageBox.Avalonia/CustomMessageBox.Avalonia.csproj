@@ -8,7 +8,6 @@
 	  <Title>Custom MessageBox for Avalonia</Title>
 	  <Authors>Kewin Kupilas</Authors>
 	  <Description>A highly customizable MessageBox pop-up for Avalonia with pre-set or custom buttons and plenty of layout options.</Description>
-	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageProjectUrl>https://github.com/Nickelony/CustomMessageBox.Avalonia</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/Nickelony/CustomMessageBox.Avalonia</RepositoryUrl>
@@ -20,13 +19,6 @@
 
   <ItemGroup>
     <None Remove="Icon\Icon.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
