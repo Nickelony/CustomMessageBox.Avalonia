@@ -1,10 +1,9 @@
-﻿namespace CustomMessageBox.Avalonia
+﻿namespace CustomMessageBox.Avalonia;
+
+public enum MessageBoxDefaultButton
 {
-	public enum MessageBoxDefaultButton
-	{
-		None = -1,
-		Button1 = 0,
-		Button2 = 1,
-		Button3 = 2
-	}
+	None = -1,
+	Button1 = 0,
+	Button2 = 1,
+	Button3 = 2
 }

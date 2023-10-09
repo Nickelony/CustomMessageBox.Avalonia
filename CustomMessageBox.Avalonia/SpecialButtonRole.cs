@@ -1,9 +1,8 @@
-﻿namespace CustomMessageBox.Avalonia
+﻿namespace CustomMessageBox.Avalonia;
+
+public enum SpecialButtonRole
 {
-	public enum SpecialButtonRole
-	{
-		None,
-		IsDefault,
-		IsCancel
-	}
+	None,
+	IsDefault,
+	IsCancel
 }

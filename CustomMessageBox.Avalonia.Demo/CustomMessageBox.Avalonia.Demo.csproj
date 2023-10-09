@@ -8,11 +8,25 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\avalonia-logo.ico" />
+    <None Remove="Assets\cn.png" />
+    <None Remove="Assets\de.png" />
+    <None Remove="Assets\es.png" />
+    <None Remove="Assets\fr.png" />
+    <None Remove="Assets\gb.png" />
+    <None Remove="Assets\it.png" />
+    <None Remove="Assets\pl.png" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\avalonia-logo.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </AvaloniaResource>
+    <AvaloniaResource Include="Assets\cn.png" />
+    <AvaloniaResource Include="Assets\de.png" />
+    <AvaloniaResource Include="Assets\es.png" />
+    <AvaloniaResource Include="Assets\fr.png" />
+    <AvaloniaResource Include="Assets\gb.png" />
+    <AvaloniaResource Include="Assets\it.png" />
+    <AvaloniaResource Include="Assets\pl.png" />
   </ItemGroup>
 
   <ItemGroup>

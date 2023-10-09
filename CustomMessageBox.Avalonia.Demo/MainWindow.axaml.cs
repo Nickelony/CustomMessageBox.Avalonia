@@ -1,10 +1,12 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using System;
+using System.Collections.Generic;
 
 namespace CustomMessageBox.Avalonia.Demo;
 
@@ -17,7 +19,7 @@ public partial class MainWindow : Window
 	{
 		MessageBox.Show(
 			"This is a traditional message box with an \"OK\" button.",
-			"Traditional 1", MessageBoxButtons.OK);
+			"Traditional 1");
 	}
 
 	private void Button_Traditional_YesNoCancel(object? sender, RoutedEventArgs e)
@@ -78,8 +80,8 @@ public partial class MainWindow : Window
 			"The message contains a custom icon with its size set to 64 x 64.",
 			"Traditional 6", bitmap)
 		{
-			IconWidth = 64,
-			IconHeight = 64
+			MaxIconWidth = 64,
+			MaxIconHeight = 64
 		};
 
 		messageBox.Show(MessageBoxButtons.YesNo, MessageBoxDefaultButton.Button1, "accent");
@@ -99,8 +101,8 @@ public partial class MainWindow : Window
 			DialogContentOrientation = Orientation.Horizontal,
 			MessagePanelOrientation = Orientation.Vertical,
 			ButtonsPanelOrientation = Orientation.Vertical,
-			IconWidth = 192,
-			IconHeight = 192
+			MaxIconWidth = 192,
+			MaxIconHeight = 192
 		};
 
 		messageBox.Show(
@@ -155,7 +157,7 @@ public partial class MainWindow : Window
 		);
 	}
 
-	private void Button_Custom4(object? sender, RoutedEventArgs e)
+	private async void Button_Custom4(object? sender, RoutedEventArgs e)
 	{
 		var bitmap = new Bitmap(AssetLoader.Open(new Uri("avares://CustomMessageBox.Avalonia.Demo/Assets/avalonia-logo.ico")));
 
@@ -164,21 +166,50 @@ public partial class MainWindow : Window
 			"The icon is custom and is displayed above the text.",
 			"Custom 4", bitmap)
 		{
+			Padding = new Thickness(24),
 			DialogContentOrientation = Orientation.Horizontal,
 			MessagePanelOrientation = Orientation.Vertical,
 			ButtonsPanelOrientation = Orientation.Vertical,
-			IconWidth = 256,
-			IconHeight = 256
+			MinButtonWidth = 110,
+			MinButtonHeight = 32,
+			HorizontalButtonContentAlignment = HorizontalAlignment.Left,
+			ButtonSpacing = 12,
+			MaxIconWidth = 256,
+			MaxIconHeight = 256
 		};
 
-		messageBox.Show(
-			new MessageBoxButton<int>("English", 1),
-			new MessageBoxButton<int>("Polish", 2),
-			new MessageBoxButton<int>("German", 3),
-			new MessageBoxButton<int>("Spanish", 4),
-			new MessageBoxButton<int>("Italian", 5),
-			new MessageBoxButton<int>("French", 6),
-			new MessageBoxButton<int>("Chinese", 7)
-		);
+		string[] languages = new[] { "English", "Polish", "German", "Spanish", "Italian", "French", "Chinese" };
+		string[] flagUris = new[] { "gb.png", "pl.png", "de.png", "es.png", "it.png", "fr.png", "cn.png" };
+
+		var buttons = new List<MessageBoxButton<int>>();
+		var iconMargin = new Thickness(6, 0, 6, 0);
+
+		for (int i = 0; i < languages.Length; i++)
+		{
+			var content = new StackPanel { Orientation = Orientation.Horizontal };
+			var flagIcon = new Bitmap(AssetLoader.Open(new Uri($"avares://CustomMessageBox.Avalonia.Demo/Assets/{flagUris[i]}")));
+			content.Children.Add(new Image { Source = flagIcon, Margin = iconMargin });
+			content.Children.Add(new TextBlock { Text = languages[i] });
+
+			buttons.Add(new MessageBoxButton<int>(content, i + 1, classNames: "LanguageOptionStyle"));
+		}
+
+		int result = await messageBox.Show(buttons.ToArray());
+
+		if (result >= 1)
+		{
+			var content = new StackPanel { Orientation = Orientation.Horizontal };
+			content.Children.Add(new TextBlock { Text = $"You have selected " });
+			content.Children.Add(new TextBlock
+			{
+				Text = languages[result - 1],
+				FontWeight = FontWeight.Bold,
+				Foreground = Brushes.Green
+			});
+
+			await MessageBox.Show(content);
+		}
+		else
+			await MessageBox.Show("You have not selected any language.", icon: MessageBoxIcon.Information);
 	}
 }

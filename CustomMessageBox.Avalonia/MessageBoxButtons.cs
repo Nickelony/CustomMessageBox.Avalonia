@@ -1,13 +1,12 @@
-﻿namespace CustomMessageBox.Avalonia
+﻿namespace CustomMessageBox.Avalonia;
+
+public enum MessageBoxButtons
 {
-	public enum MessageBoxButtons
-	{
-		OK,
-		OKCancel,
-		AbortRetryIgnore,
-		YesNoCancel,
-		YesNo,
-		RetryCancel,
-		CancelTryContinue
-	}
+	OK,
+	OKCancel,
+	AbortRetryIgnore,
+	YesNoCancel,
+	YesNo,
+	RetryCancel,
+	CancelTryContinue
 }

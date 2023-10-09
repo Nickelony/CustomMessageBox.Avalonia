@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>netstandard2.0;netcoreapp3.0</TargetFrameworks>
-	  <LangVersion>8.0</LangVersion>
+	  <LangVersion>10.0</LangVersion>
 	  <Nullable>enable</Nullable>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <Title>Custom MessageBox for Avalonia</Title>
@@ -12,7 +12,7 @@
 	  <PackageProjectUrl>https://github.com/Nickelony/CustomMessageBox.Avalonia</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/Nickelony/CustomMessageBox.Avalonia</RepositoryUrl>
 	  <PackageTags>avalonia avaloniaui custom messagebox message box popup</PackageTags>
-	  <Version>11.0.0.2</Version>
+	  <Version>11.0.0.3</Version>
 	  <PackageIcon>Icon.png</PackageIcon>
 	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>

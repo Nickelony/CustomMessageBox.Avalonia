@@ -1,16 +1,15 @@
-﻿namespace CustomMessageBox.Avalonia
+﻿namespace CustomMessageBox.Avalonia;
+
+public enum MessageBoxResult
 {
-	public enum MessageBoxResult
-	{
-		None,
-		OK,
-		Cancel,
-		Abort,
-		Retry,
-		Ignore,
-		Yes,
-		No,
-		TryAgain,
-		Continue
-	}
+	None,
+	OK,
+	Cancel,
+	Abort,
+	Retry,
+	Ignore,
+	Yes,
+	No,
+	TryAgain,
+	Continue
 }

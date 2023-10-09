@@ -1,11 +1,10 @@
-﻿namespace CustomMessageBox.Avalonia
+﻿namespace CustomMessageBox.Avalonia;
+
+public enum MessageBoxIcon
 {
-	public enum MessageBoxIcon
-	{
-		None,
-		Question,
-		Error,
-		Warning,
-		Information
-	}
+	None,
+	Question,
+	Error,
+	Warning,
+	Information
 }
